@@ -66,4 +66,8 @@ public class GerenciadorSenha {
             System.out.println(senha.getSenha());
         }
     }
+
+    public ArrayList<Senha> getHistorico(){
+        return historico;
+    }
 }

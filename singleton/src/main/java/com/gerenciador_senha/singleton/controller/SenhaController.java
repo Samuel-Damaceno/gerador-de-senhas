@@ -5,17 +5,36 @@ import com.gerenciador_senha.singleton.service.GerenciadorSenha;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/api/senhas")
+@CrossOrigin(origins = "*")
 public class SenhaController {
 
-    @PostMapping("/senha/{tipo}")
-    public String gerarSenha(@PathVariable char tipo) {
+    private final GerenciadorSenha gerenciador =
+            GerenciadorSenha.getInstancia();
 
-        GerenciadorSenha gerenciador =
-                GerenciadorSenha.getInstancia();
 
-        Senha senha = gerenciador.gerarSenha(tipo);
+    @PostMapping("/{tipo}")
+    public Senha gerarSenha(@PathVariable char tipo) {
 
-        return senha.getSenha();
+        return gerenciador.gerarSenha(
+                Character.toUpperCase(tipo)
+        );
+    }
+
+
+    @GetMapping("/historico")
+    public List<Senha> buscarHistorico() {
+
+        return gerenciador.getHistorico();
+    }
+
+
+    @GetMapping("/atual")
+    public Senha buscarSenhaAtual() {
+
+        return gerenciador.getSenhaAtual();
     }
 }
