@@ -1,8 +1,8 @@
-package singleton.src.main.java.com.gerenciador_senha.singleton.service;
+package com.gerenciador_senha.singleton.service;
 
 
 import java.util.ArrayList;
-import singleton.src.main.java.com.gerenciador_senha.singleton.model.Senha;
+import com.gerenciador_senha.singleton.model.Senha;
 
 
 public class GerenciadorSenha {

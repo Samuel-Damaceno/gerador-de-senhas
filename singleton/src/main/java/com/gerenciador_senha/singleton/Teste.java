@@ -1,5 +1,7 @@
-import singleton.src.main.java.com.gerenciador_senha.singleton.model.Senha;
-import singleton.src.main.java.com.gerenciador_senha.singleton.service.GerenciadorSenha;
+package com.gerenciador_senha.singleton;
+
+import com.gerenciador_senha.singleton.model.Senha;
+import com.gerenciador_senha.singleton.service.GerenciadorSenha;
 
 public class Teste {
 
