@@ -58,27 +58,6 @@ const currentTicketType =
     document.getElementById("currentTicketType");
 
 
-/* =====================================
-   CONTADORES TEMPORÁRIOS
-
-   O backend poderá substituir essa
-   parte futuramente.
-===================================== */
-
-let normalCounter = 0;
-
-let preferentialCounter = 0;
-
-
-/* =====================================
-   HISTÓRICO TEMPORÁRIO
-
-   Por enquanto fica apenas na memória
-   do navegador.
-===================================== */
-
-let ticketHistory = [];
-
 
 /* =====================================
    ANIMAÇÃO INICIAL
@@ -225,295 +204,238 @@ document
    GERAR SENHA
 ===================================== */
 
-function generateTicket(type) {
+async function generateTicket(type) {
 
-    let number;
-
-    let label;
-
+    let tipo;
 
     if (type === "normal") {
-
-        normalCounter++;
-
-
-        number =
-            `N${String(normalCounter)
-                .padStart(3, "0")}`;
-
-
-        label =
-            "Atendimento Normal";
-
-
-        ticketType.style.background =
-            "#dceff5";
-
-        ticketType.style.color =
-            "#174f68";
-
+        tipo = "N";
+    } else if (type === "preferencial") {
+        tipo = "P";
     }
 
+    try {
 
-    if (type === "preferencial") {
+        const response = await fetch(`/api/senhas/${tipo}`, {
+            method: "POST"
+        });
 
-        preferentialCounter++;
+        if (!response.ok) {
+            throw new Error("Erro ao gerar senha.");
+        }
 
+        const senha = await response.json();
 
-        number =
-            `P${String(preferentialCounter)
-                .padStart(3, "0")}`;
+        let label;
 
+        if (tipo === "N") {
 
-        label =
-            "Atendimento Preferencial";
+            label = "Atendimento Normal";
 
+            ticketType.style.background =
+                "#dceff5";
 
-        ticketType.style.background =
-            "#dcf3ef";
+            ticketType.style.color =
+                "#174f68";
 
-        ticketType.style.color =
-            "#18a89d";
+        } else {
 
+            label = "Atendimento Preferencial";
+
+            ticketType.style.background =
+                "#dcf3ef";
+
+            ticketType.style.color =
+                "#18a89d";
+        }
+
+        ticketNumber.textContent =
+            senha.senha;
+
+        ticketType.textContent =
+            label;
+
+        showModal();
+
+        await updateHistory();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Não foi possível gerar a senha.");
     }
-
-
-    ticketNumber.textContent =
-        number;
-
-
-    ticketType.textContent =
-        label;
-
-
-    /* Adiciona ao histórico */
-
-    addToHistory(
-        number,
-        label
-    );
-
-
-    /* Abre o modal */
-
-    showModal();
-
 }
-
-
-/* =====================================
-   ADICIONAR AO HISTÓRICO
-===================================== */
-
-function addToHistory(number, type) {
-
-    const now =
-        new Date();
-
-
-    const ticket = {
-
-        number: number,
-
-        type: type,
-
-        time:
-            now.toLocaleTimeString(
-                "pt-BR",
-                {
-
-                    hour: "2-digit",
-
-                    minute: "2-digit"
-
-                }
-            )
-
-    };
-
-
-    /*
-        unshift coloca a nova senha
-        no início da lista
-    */
-
-    ticketHistory.unshift(ticket);
-
-
-    updateHistory();
-
-}
-
 
 /* =====================================
    ATUALIZAR HISTÓRICO
 ===================================== */
 
-function updateHistory() {
+async function updateHistory() {
 
-    historyList.innerHTML = "";
+    try {
+
+        const response =
+            await fetch("/api/senhas/historico");
+
+        if (!response.ok) {
+            throw new Error("Erro ao buscar histórico.");
+        }
+
+        const ticketHistory =
+            await response.json();
+
+        historyList.innerHTML = "";
+
+        /* =====================================
+           NENHUMA SENHA
+        ===================================== */
+
+        if (ticketHistory.length === 0) {
+
+            historyList.innerHTML = `
+                <div class="history-empty">
+                    Nenhuma senha foi gerada ainda.
+                </div>
+            `;
+
+            currentTicket.textContent =
+                "---";
+
+            currentTicketType.textContent =
+                "Nenhuma senha gerada";
+
+            historyCount.textContent =
+                "0 senhas";
+
+            return;
+        }
 
 
-    /* Caso ainda não exista nenhuma senha */
+        /* =====================================
+           ÚLTIMA SENHA
+        ===================================== */
 
-    if (ticketHistory.length === 0) {
-
-        historyList.innerHTML = `
-            <div class="history-empty">
-                Nenhuma senha foi gerada ainda.
-            </div>
-        `;
-
+        const latest =
+            ticketHistory[ticketHistory.length - 1];
 
         currentTicket.textContent =
-            "---";
-
+            latest.senha;
 
         currentTicketType.textContent =
-            "Nenhuma senha gerada";
+            latest.tipo === "N"
+                ? "Atendimento Normal"
+                : "Atendimento Preferencial";
 
+
+        /* =====================================
+           CONTADOR
+        ===================================== */
 
         historyCount.textContent =
-            "0 senhas";
+            `${ticketHistory.length} ${
+                ticketHistory.length === 1
+                    ? "senha"
+                    : "senhas"
+            }`;
 
 
-        return;
+        /* =====================================
+           EXIBE AS ÚLTIMAS 5
+        ===================================== */
 
-    }
-
-
-    /* =====================================
-       ÚLTIMA SENHA
-    ===================================== */
-
-    const latest =
-        ticketHistory[0];
+        const latestTickets =
+            ticketHistory
+                .slice()
+                .reverse()
+                .slice(0, 5);
 
 
-    currentTicket.textContent =
-        latest.number;
+        latestTickets.forEach(senha => {
+
+            const item =
+                document.createElement("div");
+
+            item.classList.add(
+                "history-item"
+            );
 
 
-    currentTicketType.textContent =
-        latest.type;
+            const label =
+                senha.tipo === "N"
+                    ? "Atendimento Normal"
+                    : "Atendimento Preferencial";
 
 
-    /* =====================================
-       CONTADOR
-    ===================================== */
+            item.innerHTML = `
 
-    historyCount.textContent =
-        `${ticketHistory.length} ${
-            ticketHistory.length === 1
-                ? "senha"
-                : "senhas"
-        }`;
-
-
-    /* =====================================
-       EXIBE SOMENTE AS 6 ÚLTIMAS
-    ===================================== */
-
-    const latestTickets =
-        ticketHistory.slice(0, 6);
-
-
-    latestTickets.forEach(ticket => {
-
-        const item =
-            document.createElement("div");
-
-
-        item.classList.add(
-            "history-item"
-        );
-
-
-        item.innerHTML = `
-
-            <span class="history-number">
-                ${ticket.number}
-            </span>
-
-
-            <div class="history-info">
-
-                <strong>
-                    ${ticket.type}
-                </strong>
-
-                <span>
-                    Senha registrada
+                <span class="history-number">
+                    ${senha.senha}
                 </span>
 
-            </div>
+                <div class="history-info">
+
+                    <strong>
+                        ${label}
+                    </strong>
+
+                    <span>
+                        Senha registrada
+                    </span>
+
+                </div>
+
+            `;
 
 
-            <span class="history-time">
-                ${ticket.time}
-            </span>
+            historyList.appendChild(item);
 
-        `;
+        });
 
 
-        historyList.appendChild(item);
+        /* =====================================
+           ANIMAÇÕES
+        ===================================== */
 
-    });
+        const firstItem =
+            historyList.querySelector(
+                ".history-item:first-child"
+            );
+
+        if (firstItem) {
+
+            gsap.from(
+                firstItem,
+                {
+                    opacity: 0,
+                    x: 20,
+                    duration: 0.35,
+                    ease: "power2.out"
+                }
+            );
+
+        }
 
 
-    /* Anima a senha mais recente */
-
-    const firstItem =
-        historyList.querySelector(
-            ".history-item:first-child"
-        );
-
-
-    if (firstItem) {
-
-        gsap.from(
-            firstItem,
+        gsap.fromTo(
+            currentTicket,
             {
-
                 opacity: 0,
-
-                x: 20,
-
-                duration: 0.35,
-
-                ease: "power2.out"
-
+                scale: 0.85
+            },
+            {
+                opacity: 1,
+                scale: 1,
+                duration: 0.4,
+                ease: "back.out(1.5)"
             }
         );
 
+    } catch (error) {
+
+        console.error(error);
+
     }
-
-
-    /* Anima a senha grande */
-
-    gsap.fromTo(
-        currentTicket,
-        {
-
-            opacity: 0,
-
-            scale: 0.85
-
-        },
-
-        {
-
-            opacity: 1,
-
-            scale: 1,
-
-            duration: 0.4,
-
-            ease: "back.out(1.5)"
-
-        }
-    );
-
 }
 
 
