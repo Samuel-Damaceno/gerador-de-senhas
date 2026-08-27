@@ -54,23 +54,12 @@ public class GerenciadorSenha {
      */
 
 
-    public Senha gerarSenha(char tipo) {
+     public String gerarSenha (SenhaCreator creator){
+         ISenha senha = creator.criarSenha();
+         senhaAtual = senha.
 
-        // Validação: garante que apenas tipos aceitos sejam processados
-        if (tipo != 'N' && tipo != 'P') {
-            throw new IllegalArgumentException("Tipo de senha inválido. Use 'N' para Normal ou 'P' para Preferencial.");
-        } 
-        
-        // Se for Normal, incrementa o contador normal e cria a senha
-        if (tipo == 'N') {
-            numeroNormal++;
-            senhaAtual = new Senha(numeroNormal, tipo);
-        } 
-        // Se for Preferencial, incrementa o contador preferencial e cria a senha
-        else if (tipo == 'P') {
-            numeroPreferencial++;
-            senhaAtual = new Senha(numeroPreferencial, tipo);
-        }
+     }
+
 
 
 
