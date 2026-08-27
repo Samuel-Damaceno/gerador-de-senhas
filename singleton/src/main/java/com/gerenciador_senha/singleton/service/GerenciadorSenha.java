@@ -2,6 +2,8 @@ package com.gerenciador_senha.singleton.service;
 
 import java.util.ArrayList;
 import com.gerenciador_senha.singleton.model.Senha;
+import com.gerenciador_senha.singleton.factory.SenhaCreator;
+import com.gerenciador_senha.singleton.model.ISenha;
 
 /**
  * Classe responsável pelo gerenciamento de senhas da aplicação.
@@ -50,6 +52,8 @@ public class GerenciadorSenha {
      * @return O objeto Senha recém-criado.
      * @throws IllegalArgumentException Se o tipo for diferente de 'N' ou 'P'.
      */
+
+
     public Senha gerarSenha(char tipo) {
 
         // Validação: garante que apenas tipos aceitos sejam processados
@@ -67,6 +71,12 @@ public class GerenciadorSenha {
             numeroPreferencial++;
             senhaAtual = new Senha(numeroPreferencial, tipo);
         }
+
+
+
+
+
+
 
         // Adiciona a nova senha gerada ao histórico
         adicionarHistorico(senhaAtual);
