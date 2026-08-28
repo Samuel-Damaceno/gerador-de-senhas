@@ -1,6 +1,5 @@
 package com.gerenciador_senha.singleton.controller;
 
-import com.gerenciador_senha.singleton.model.Senha;
 import com.gerenciador_senha.singleton.service.GerenciadorSenha;
 import org.springframework.web.bind.annotation.*;
 

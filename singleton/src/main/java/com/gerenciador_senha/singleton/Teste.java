@@ -1,8 +1,5 @@
 package com.gerenciador_senha.singleton;
 
-import java.util.ArrayList;
-
-import com.gerenciador_senha.singleton.model.Senha;
 import com.gerenciador_senha.singleton.service.GerenciadorSenha;
 
 /**

@@ -7,7 +7,7 @@ import com.gerenciador_senha.singleton.model.SenhaNormal;
 public class SenhaNormalCreator extends SenhaCreator {
 
     @Override
-    public ISenha gerarSenha(){
+    public ISenha criarTipo(){
         return new SenhaNormal();
     }
 

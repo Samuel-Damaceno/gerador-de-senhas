@@ -5,7 +5,7 @@ import com.gerenciador_senha.singleton.model.SenhaPreferencial;
 public class SenhaPreferencialCreator extends SenhaCreator{
 
     @Override
-    public ISenha gerarSenha(){
+    public ISenha criarTipo(){
         return new SenhaPreferencial();
     }
 
