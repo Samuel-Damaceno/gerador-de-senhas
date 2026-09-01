@@ -17,7 +17,7 @@ public class Teste {
         System.out.println("Gerando senhas:");
 
         // Gera e exibe senhas normais ('N') e preferenciais ('P')
-        Senha senha1 = gerenciador.gerarSenha('N');
+        ISenha senha1 = gerenciador.gerarSenha('N');
         System.out.println(senha1.getSenha()); // Deve exibir "N001"
 
         Senha senha2 = gerenciador.gerarSenha('N');

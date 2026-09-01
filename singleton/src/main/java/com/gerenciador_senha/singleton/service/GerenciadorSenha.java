@@ -1,6 +1,7 @@
 package com.gerenciador_senha.singleton.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.gerenciador_senha.singleton.factory.SenhaCreator;
 import com.gerenciador_senha.singleton.model.ISenha;
@@ -14,10 +15,10 @@ public class GerenciadorSenha {
 
     // 1. Atributo estático que armazenará a única instância da classe (Singleton)
     private static GerenciadorSenha instancia;
-    private String senhaAtual;       // Guarda a última senha que foi gerada
-
+    private ISenha senhaAtual;       // Guarda a última senha que foi gerada
+    private List<ISenha> historico = new ArrayList<>(); // Guarda o histórico de objetos
     // Lista para armazenar o histórico recente das últimas senhas geradas
-    private ArrayList<String> historico = new ArrayList<>();
+    //private ArrayList<String> historico = new ArrayList<>();
 
     /**
      * 2. Construtor PRIVADO.
@@ -42,9 +43,9 @@ public class GerenciadorSenha {
 
     //*******************
 
-     public String gerarSenha (SenhaCreator creator){
+     public ISenha gerarSenha (SenhaCreator creator){
          ISenha senhaGerada = creator.criarTipo(); //gera senhaNormal ou senhaPreferencial
-         senhaAtual = senhaGerada.gerarSenha();
+         senhaAtual = senhaGerada;
          historico.add(senhaAtual);
 
          if (historico.size() > 5){
@@ -56,11 +57,11 @@ public class GerenciadorSenha {
 
     //*******************
 
-    public String getSenhaAtual(){
+    public ISenha getSenhaAtual(){
         return senhaAtual;
     }
 
-    public ArrayList<String> getHistorico(){
+    public List<ISenha> getHistorico(){
         return historico;
     }
 
