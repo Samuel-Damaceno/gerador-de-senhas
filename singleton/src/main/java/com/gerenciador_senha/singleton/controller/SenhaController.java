@@ -1,9 +1,18 @@
 package com.gerenciador_senha.singleton.controller;
 
-import com.gerenciador_senha.singleton.service.GerenciadorSenha;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gerenciador_senha.singleton.factory.SenhaNormalCreator;
+import com.gerenciador_senha.singleton.factory.SenhaPreferencialCreator;
+import com.gerenciador_senha.singleton.model.ISenha;
+import com.gerenciador_senha.singleton.service.GerenciadorSenha;
 
 /**
  * Controller REST responsável por expor as rotas (endpoints) da API de senhas.
@@ -26,9 +35,21 @@ public class SenhaController {
      * @return O objeto Senha recém-gerado, que o Spring converte automaticamente em JSON.
      */
     @PostMapping("/{tipo}")
-    public Senha gerarSenha(@PathVariable char tipo) {
+    //public ISenha gerarSenha(@PathVariable char tipo) {
         // Converte o caractere recebido na URL para maiúsculo e chama o serviço de senhas
-        return gerenciador.gerarSenha(Character.toUpperCase(tipo));
+        //return gerenciador.gerarSenha(Character.toUpperCase(tipo));
+    //}
+    public ISenha gerarSenha(@PathVariable char tipo) {
+        char tipoMaiusculo = Character.toUpperCase(tipo);
+        
+        // Aplicando o Factory Method com base na escolha do usuário
+        if (tipoMaiusculo == 'N') {
+            return gerenciador.gerarSenha(new SenhaNormalCreator());
+        } else if (tipoMaiusculo == 'P') {
+            return gerenciador.gerarSenha(new SenhaPreferencialCreator());
+        }
+        
+        throw new IllegalArgumentException("Tipo de senha inválido: " + tipo);
     }
 
     /**
@@ -38,7 +59,7 @@ public class SenhaController {
      * @return Lista (List) contendo os últimos objetos Senha gerados.
      */
     @GetMapping("/historico")
-    public List<Senha> buscarHistorico() {
+    public List<ISenha> buscarHistorico() {
         return gerenciador.getHistorico();
     }
 
@@ -49,7 +70,7 @@ public class SenhaController {
      * @return O objeto Senha atual do sistema.
      */
     @GetMapping("/atual")
-    public Senha buscarSenhaAtual() {
+    public ISenha buscarSenhaAtual() {
         return gerenciador.getSenhaAtual();
     }
 }
