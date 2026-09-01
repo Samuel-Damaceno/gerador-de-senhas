@@ -1,5 +1,8 @@
 package com.gerenciador_senha.singleton;
 
+import com.gerenciador_senha.singleton.factory.SenhaNormalCreator;
+import com.gerenciador_senha.singleton.factory.SenhaPreferencialCreator;
+import com.gerenciador_senha.singleton.model.ISenha;
 import com.gerenciador_senha.singleton.service.GerenciadorSenha;
 
 /**
@@ -17,20 +20,20 @@ public class Teste {
         System.out.println("Gerando senhas:");
 
         // Gera e exibe senhas normais ('N') e preferenciais ('P')
-        ISenha senha1 = gerenciador.gerarSenha('N');
-        System.out.println(senha1.getSenha()); // Deve exibir "N001"
+        ISenha senha1 = gerenciador.gerarSenha(new SenhaNormalCreator());
+        System.out.println(senha1.gerarSenha()); 
 
-        Senha senha2 = gerenciador.gerarSenha('N');
-        System.out.println(senha2.getSenha()); // Deve exibir "N002"
+        ISenha senha2 = gerenciador.gerarSenha(new SenhaNormalCreator());
+        System.out.println(senha2.gerarSenha()); 
 
-        Senha senha3 = gerenciador.gerarSenha('P');
-        System.out.println(senha3.getSenha()); // Deve exibir "P001"
+        ISenha senha3 = gerenciador.gerarSenha(new SenhaPreferencialCreator());
+        System.out.println(senha3.gerarSenha()); 
 
-        Senha senha4 = gerenciador.gerarSenha('N');
-        System.out.println(senha4.getSenha()); // Deve exibir "N003"
+        ISenha senha4 = gerenciador.gerarSenha(new SenhaNormalCreator());
+        System.out.println(senha4.gerarSenha()); 
 
-        Senha senha5 = gerenciador.gerarSenha('P');
-        System.out.println(senha5.getSenha()); // Deve exibir "P002"
+        ISenha senha5 = gerenciador.gerarSenha(new SenhaPreferencialCreator());
+        System.out.println(senha5.gerarSenha());
 
 
         System.out.println("\nTestando Singleton:");
@@ -50,9 +53,10 @@ public class Teste {
         // Percorre cada objeto 'senha' dentro da lista 'historico'
         // Lembrete: o histórico armazena as senhas em ordem de criação
         // script.js inverte essa ordem para gerar um histórico correto para o frontend.
-        for (Senha senha : gerenciador.getHistorico()) {
-            // Chama o método getSenha() para exibir a senha formatada (ex: N001, P001)
-            System.out.println("- " + senha.getSenha());
+       System.out.println("\nTestando o histórico:");
+        for (ISenha senha : gerenciador.getHistorico()) {
+            // Chama o método gerarSenha() para exibir o texto da senha guardada no histórico
+            System.out.println("- " + senha.gerarSenha());
         }
     }
 }
