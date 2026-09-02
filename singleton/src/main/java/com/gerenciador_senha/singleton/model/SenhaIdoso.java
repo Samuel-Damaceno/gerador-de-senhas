@@ -1,9 +1,9 @@
 package com.gerenciador_senha.singleton.model;
 
-public class SenhaPreferencial implements ISenha{
+public class SenhaIdoso implements ISenha{
 
     @Override
     public String gerarSenha() {
-        return "P-" + System.currentTimeMillis();
+        return "I-" + System.currentTimeMillis();
     }
 }
