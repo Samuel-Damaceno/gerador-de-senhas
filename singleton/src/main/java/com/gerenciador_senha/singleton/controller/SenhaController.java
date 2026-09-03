@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gerenciador_senha.singleton.factory.SenhaIdosoCreator;
 import com.gerenciador_senha.singleton.factory.SenhaNormalCreator;
-import com.gerenciador_senha.singleton.factory.SenhaPreferencialCreator;
+import com.gerenciador_senha.singleton.factory.SenhaVipCreator;
 import com.gerenciador_senha.singleton.model.ISenha;
 import com.gerenciador_senha.singleton.service.GerenciadorSenha;
 
@@ -45,8 +46,10 @@ public class SenhaController {
         // Aplicando o Factory Method com base na escolha do usuário
         if (tipoMaiusculo == 'N') {
             return gerenciador.gerarSenha(new SenhaNormalCreator());
-        } else if (tipoMaiusculo == 'P') {
-            return gerenciador.gerarSenha(new SenhaPreferencialCreator());
+        } else if (tipoMaiusculo == 'I') {
+            return gerenciador.gerarSenha(new SenhaIdosoCreator());
+        } else if (tipoMaiusculo == 'V') {
+            return gerenciador.gerarSenha(new SenhaVipCreator());
         }
         
         throw new IllegalArgumentException("Tipo de senha inválido: " + tipo);
