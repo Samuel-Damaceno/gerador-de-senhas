@@ -1,7 +1,8 @@
 package com.gerenciador_senha.singleton;
 
+import com.gerenciador_senha.singleton.factory.SenhaIdosoCreator;
 import com.gerenciador_senha.singleton.factory.SenhaNormalCreator;
-import com.gerenciador_senha.singleton.factory.SenhaPreferencialCreator;
+import com.gerenciador_senha.singleton.factory.SenhaVipCreator;
 import com.gerenciador_senha.singleton.model.ISenha;
 import com.gerenciador_senha.singleton.service.GerenciadorSenha;
 
@@ -26,13 +27,13 @@ public class Teste {
         ISenha senha2 = gerenciador.gerarSenha(new SenhaNormalCreator());
         System.out.println(senha2.gerarSenha()); 
 
-        ISenha senha3 = gerenciador.gerarSenha(new SenhaPreferencialCreator());
+        ISenha senha3 = gerenciador.gerarSenha(new SenhaVipCreator());
         System.out.println(senha3.gerarSenha()); 
 
         ISenha senha4 = gerenciador.gerarSenha(new SenhaNormalCreator());
         System.out.println(senha4.gerarSenha()); 
 
-        ISenha senha5 = gerenciador.gerarSenha(new SenhaPreferencialCreator());
+        ISenha senha5 = gerenciador.gerarSenha(new SenhaIdosoCreator());
         System.out.println(senha5.gerarSenha());
 
 
