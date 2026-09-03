@@ -15,4 +15,8 @@ private final String Senha;
     public String gerarSenha() {
         return Senha;
     }
+
+    public String getSenha() {
+        return Senha;
+    }
 }

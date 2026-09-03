@@ -11,8 +11,13 @@ public class SenhaIdoso implements ISenha{
         Senha = String.format("I - %03d" , contador);
     }
 
+    
     @Override
     public String gerarSenha() {
+        return Senha;
+    }
+
+    public String getSenha() {
         return Senha;
     }
 }

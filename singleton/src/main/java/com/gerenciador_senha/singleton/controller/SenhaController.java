@@ -2,12 +2,14 @@ package com.gerenciador_senha.singleton.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.gerenciador_senha.singleton.factory.SenhaIdosoCreator;
 import com.gerenciador_senha.singleton.factory.SenhaNormalCreator;
@@ -32,7 +34,7 @@ public class SenhaController {
      * Endpoint para gerar uma nova senha.
      * Mapeia requisições HTTP do tipo POST para a rota: /api/senhas/{tipo}
      *
-     * @param tipo Caractere recebido na URL que representa o tipo ('N' para Normal, 'P' para Preferencial).
+     * @param tipo Caractere recebido na URL que representa o tipo ('N' para Normal, 'I' para Idoso e 'V' para VIP).
      * @return O objeto Senha recém-gerado, que o Spring converte automaticamente em JSON.
      */
     @PostMapping("/{tipo}")
@@ -52,7 +54,10 @@ public class SenhaController {
             return gerenciador.gerarSenha(new SenhaVipCreator());
         }
         
-        throw new IllegalArgumentException("Tipo de senha inválido: " + tipo);
+        throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            "Tipo de senha inválido" + tipo
+        );
     }
 
     /**
