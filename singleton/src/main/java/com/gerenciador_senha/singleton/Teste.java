@@ -36,6 +36,18 @@ public class Teste {
         ISenha senha5 = gerenciador.gerarSenha(new SenhaIdosoCreator());
         System.out.println(senha5.gerarSenha());
 
+        ISenha senha6 = gerenciador.gerarSenha(new SenhaVipCreator());
+        System.out.println(senha6.gerarSenha()); 
+
+        ISenha senha7 = gerenciador.gerarSenha(new SenhaVipCreator());
+        System.out.println(senha7.gerarSenha());
+        
+        ISenha senha8 = gerenciador.gerarSenha(new SenhaIdosoCreator());
+        System.out.println(senha8.gerarSenha());
+        
+        ISenha senha9 = gerenciador.gerarSenha(new SenhaIdosoCreator());
+        System.out.println(senha9.gerarSenha());
+
 
         System.out.println("\nTestando Singleton:");
 

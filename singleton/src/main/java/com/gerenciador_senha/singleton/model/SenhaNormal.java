@@ -2,11 +2,17 @@ package com.gerenciador_senha.singleton.model;
 
 public class SenhaNormal implements ISenha{
 
-    @Override
-    public String gerarSenha(){
-        return "N-" + System.currentTimeMillis(); //Concatenação entre o tipo de senha e o milissegundo do tempo atual.
+    private final String Senha;
+    private static int contador = 0;
+
+  
+    public SenhaNormal() {
+        contador ++;
+        Senha = String.format("N - %03d" , contador);
     }
 
-
-
+    @Override
+    public String gerarSenha() {
+        return Senha;
+    }
 }

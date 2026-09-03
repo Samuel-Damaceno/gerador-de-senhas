@@ -2,10 +2,17 @@ package com.gerenciador_senha.singleton.model;
 
 public class SenhaVip implements ISenha {
  
-    @Override
-    public String gerarSenha(){
-        return "V-" + System.currentTimeMillis(); //Concatenação entre o tipo de senha e o milissegundo do tempo atual.
+private final String Senha;
+    private static int contador = 0;
+
+  
+    public SenhaVip() {
+        contador ++;
+       Senha = String.format("V - %03d" , contador);
     }
 
-
+    @Override
+    public String gerarSenha() {
+        return Senha;
+    }
 }
