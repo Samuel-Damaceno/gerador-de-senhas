@@ -1,63 +1,611 @@
-<section class="service-options">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    <!-- NORMAL -->
-    <button
-        class="service-card"
-        id="btnNormal"
-        type="button"
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
     >
-        <div class="service-icon normal-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="7" r="4" />
-                <path d="M4.5 21a7.5 7.5 0 0 1 15 0" />
-            </svg>
-        </div>
-        <div class="service-content">
-            <span>Atendimento</span>
-            <strong>Normal</strong>
-            <p>Atendimento por ordem de chegada.</p>
-        </div>
-        <div class="service-arrow">→</div>
-    </button>
 
-    <!-- IDOSO -->
-    <button
-        class="service-card"
-        id="btnIdoso"
-        type="button"
+    <title>Gerador de Senhas</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
     >
-        <div class="service-icon preferential-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="6" r="3" />
-                <path d="M5 21v-4a7 7 0 0 1 14 0v4" />
-                <path d="M12 12v5" />
-            </svg>
-        </div>
-        <div class="service-content">
-            <span>Atendimento</span>
-            <strong>Idoso</strong>
-            <p>Atendimento prioritário ao público 60+.</p>
-        </div>
-        <div class="service-arrow">→</div>
-    </button>
 
-    <!-- VIP -->
-    <button
-        class="service-card"
-        id="btnVip"
-        type="button"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
     >
-        <div class="service-icon vip-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
-        </div>
-        <div class="service-content">
-            <span>Atendimento</span>
-            <strong>VIP</strong>
-            <p>Exclusivo para pessoas VIP.</p>
-        </div>
-        <div class="service-arrow">→</div>
-    </button>
+</head>
 
-</section>
+
+<body>
+
+    <!-- DECORAÇÕES DE FUNDO -->
+
+    <div class="background-decoration decoration-one"></div>
+    <div class="background-decoration decoration-two"></div>
+
+
+    <div class="page">
+
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="brand-symbol">
+                    Q
+                </div>
+
+                <div class="brand-text">
+
+                    <strong>
+                        TechCare
+                    </strong>
+
+                    <span>
+                        Sempre cuidando de você
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAVEGAÇÃO -->
+
+            <nav class="nav-tabs">
+
+                <button
+                    class="nav-tab active"
+                    data-tab="gerador"
+                    type="button"
+                >
+                    Retirar senha
+                </button>
+
+
+                <button
+                    class="nav-tab"
+                    data-tab="historico"
+                    type="button"
+                >
+                    Histórico
+                </button>
+
+            </nav>
+
+
+        </header>
+
+
+
+        <!-- =====================================
+             ABA: GERADOR
+        ====================================== -->
+
+        <section
+            class="tab-content active"
+            id="gerador"
+        >
+
+            <main class="main-content">
+
+
+                <!-- COLUNA ESQUERDA -->
+
+                <section class="welcome">
+
+                    <div class="welcome-content">
+
+                        <span class="eyebrow">
+                            GERENCIADOR DE SENHAS
+                        </span>
+
+
+                        <h1>
+                           Bem-vindo! Retire sua senha.
+                        </h1>
+                    
+                </section>
+
+
+
+                <!-- COLUNA DIREITA -->
+
+                <section class="service-area">
+
+                    <div class="service-header">
+
+                        <span>
+                            Tipo de atendimento
+                        </span>
+
+                        <h2>
+                            Selecione uma opção
+                        </h2>
+
+                    </div>
+
+
+
+                    <div class="service-options">
+
+
+                        <!-- NORMAL -->
+
+                        <button
+                            class="service-card"
+                            id="btnNormal"
+                            type="button"
+                        >
+
+                            <div class="service-icon normal-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+
+                                    <circle
+                                        cx="12"
+                                        cy="7"
+                                        r="4"
+                                    />
+
+                                    <path
+                                        d="M4.5 21a7.5 7.5 0 0 1 15 0"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <div class="service-content">
+
+                                <span>
+                                    Atendimento
+                                </span>
+
+                                <strong>
+                                    Normal
+                                </strong>
+
+                                <p>
+                                    Atendimento por ordem de chegada.
+                                </p>
+
+                            </div>
+
+
+                            <div class="service-arrow">
+                                →
+                            </div>
+
+                        </button>
+
+
+
+                        <!-- IDOSO -->
+
+                        <button
+                            class="service-card"
+                            id="btnIdoso"
+                            type="button"
+                        >
+
+                            <div class="service-icon Idoso-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+
+                                    <circle
+                                        cx="12"
+                                        cy="6"
+                                        r="3"
+                                    />
+
+                                    <path
+                                        d="M5 21v-4a7 7 0 0 1 14 0v4"
+                                    />
+
+                                    <path
+                                        d="M12 12v5"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <div class="service-content">
+
+                                <span>
+                                    Atendimento
+                                </span>
+
+                                <strong>
+                                    Idoso
+                                </strong>
+
+                                <p>
+                                    Atendimento prioritário ao público 60+.
+                                </p>
+
+                            </div>
+                         
+                         <!-- VIP -->
+
+                        <button
+                            class="service-card"
+                            id="btnVip"
+                            type="button"
+                        >
+
+                            <div class="service-icon Vip-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+
+                                </svg>
+
+                            </div>
+
+
+                            <div class="service-content">
+
+                                <span>
+                                    Atendimento
+                                </span>
+
+                                <strong>
+                                    VIP
+                                </strong>
+
+                                <p>
+                                    Exclusivo para pessoas VIP.
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="service-arrow">
+                                →
+                            </div>
+
+                        </button>
+
+
+                    </div>
+
+
+
+                    <!-- INFORMAÇÃO -->
+
+                    <div class="service-footer">
+
+                        <div class="small-info-icon">
+                            i
+                        </div>
+
+                        <p>
+                            Aguarde até ser chamado no painel 01
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ABA: HISTÓRICO
+        ====================================== -->
+
+        <section
+            class="tab-content"
+            id="historico"
+        >
+
+            <div class="history-page">
+
+
+                <!-- TÍTULO -->
+
+                <div class="history-header">
+
+                    <span class="eyebrow">
+                        HISTÓRICO DE ATENDIMENTOS
+                    </span>
+
+                    <h1>
+                        Painel de Senhas
+                    </h1>
+
+                    <p>
+                        Aguarde até ser chamado.
+                    </p>
+
+                </div>
+
+
+
+                <!-- CONTEÚDO DO HISTÓRICO -->
+
+                <div class="history-layout">
+
+
+                    <!-- ÚLTIMA SENHA -->
+
+                    <section class="current-ticket">
+
+                        <span class="current-label">
+                            ÚLTIMA SENHA
+                        </span>
+
+
+                        <strong id="currentTicket">
+                            ---
+                        </strong>
+
+
+                        <span
+                            class="current-type"
+                            id="currentTicketType"
+                        >
+                            Nenhum histórico encontrado
+                        </span>
+
+
+                        <div class="pulse-line"></div>
+
+
+                        <p>
+                            Última senha chamada para atendimento.
+                        </p>
+
+                    </section>
+
+
+
+                    <!-- LISTA DE SENHAS -->
+
+                    <section class="history-card">
+
+
+                        <div class="history-card-header">
+
+                            <div>
+
+                                <span>
+                                    Histórico
+                                </span>
+
+                                <h2>
+                                    Últimas senhas
+                                </h2>
+
+                            </div>
+
+
+                            <span
+                                class="history-count"
+                                id="historyCount"
+                            >
+                                0 senhas
+                            </span>
+
+                        </div>
+
+
+
+                        <div
+                            class="history-list"
+                            id="historyList"
+                        >
+
+                            <div class="history-empty">
+                                Nenhuma senha foi gerada ainda.
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer class="footer">
+
+
+            <div class="footer-right">
+
+                <span id="date"></span>
+
+                <span class="footer-separator"></span>
+
+                <strong id="clock">
+                    --:--
+                </strong>
+
+            </div>
+
+        </footer>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         MODAL DA SENHA
+    ====================================== -->
+
+    <div
+        class="modal-overlay"
+        id="modal"
+        aria-hidden="true"
+    >
+
+        <div class="ticket-modal">
+
+
+            <!-- FECHAR -->
+
+            <button
+                class="modal-close"
+                id="closeModal"
+                aria-label="Fechar"
+                type="button"
+            >
+                ×
+            </button>
+
+
+
+            <!-- ÍCONE -->
+
+            <div class="modal-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path
+                        d="M20 6 9 17l-5-5"
+                    />
+
+                </svg>
+
+            </div>
+
+
+
+            <span class="ticket-small-title">
+                SENHA GERADA
+            </span>
+
+
+            <p class="ticket-description">
+                Seu número de atendimento é
+            </p>
+
+
+
+            <!-- NÚMERO -->
+
+            <strong
+                class="ticket-number"
+                id="ticketNumber"
+            >
+                N001
+            </strong>
+
+
+
+            <!-- TIPO -->
+
+            <span
+                class="ticket-type"
+                id="ticketType"
+            >
+                Atendimento Normal
+            </span>
+
+
+
+            <div class="ticket-divider"></div>
+
+
+
+            <p class="ticket-message">
+                Acompanhe o painel e aguarde sua chamada.
+            </p>
+
+
+
+            <button
+                class="confirm-button"
+                id="finishButton"
+                type="button"
+            >
+                Entendi
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         GSAP
+    ====================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
+    ></script>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
