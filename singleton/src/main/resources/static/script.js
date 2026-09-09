@@ -55,11 +55,11 @@ async function generateTicket(type) {
         const labels = {
             N: { text: "Atendimento Normal", bg: "#dceff5", color: "#174f68" },
             I: { text: "Atendimento Idoso", bg: "#dcf3ef", color: "#18a89d" },
-            V: { text: "Atendimento VIP", bg: "#dcf3ef", color: "#18a89d" }
+            V: { text: "Atendimento VIP", bg: "#fff3cd", color: "#b8860b" }
         };
 
         const currentLabel = labels[tipo] || labels.N;
-        ticketNumber.textContent = senha.senha;
+        ticketNumber.textContent = senha.Senha;
         ticketType.textContent = currentLabel.text;
         ticketType.style.background = currentLabel.bg;
         ticketType.style.color = currentLabel.color;
@@ -93,26 +93,44 @@ async function updateHistory() {
         }
 
         const latest = ticketHistory[ticketHistory.length - 1];
-        currentTicket.textContent = latest.senha;
-        const tipoLatest = latest.senha.charAt(0);
+        currentTicket.textContent = latest.Senha;
+        const tipoLatest = latest.Senha.charAt(0);
         
         const labelMap = { N: "Atendimento Normal", I: "Atendimento Idoso", V: "Atendimento VIP" };
         currentTicketType.textContent = labelMap[tipoLatest] || "";
         historyCount.textContent = `${ticketHistory.length} ${ticketHistory.length === 1 ? "senha" : "senhas"}`;
 
+
+
+
         ticketHistory.slice().reverse().slice(0, 5).forEach(senha => {
+
             const item = document.createElement("div");
+            const t = senha.Senha.charAt(0);
+
             item.classList.add("history-item");
-            const t = senha.senha.charAt(0);
+
+            if (t === "N") {
+                item.classList.add("history-normal");
+            } else if (t === "I") {
+                item.classList.add("history-idoso");
+            } else if (t === "V") {
+                item.classList.add("history-vip");
+            }
+
             item.innerHTML = `
-                <span class="history-number">${senha.senha}</span>
-                <div class="history-info">
-                    <strong>${labelMap[t]}</strong>
-                    <span>Senha registrada</span>
-                </div>
-            `;
+        <span class="history-number">${senha.Senha}</span>
+        <div class="history-info">
+            <strong>${labelMap[t]}</strong>
+            <span>Senha registrada</span>
+        </div>
+    `;
+
             historyList.appendChild(item);
         });
+
+
+
 
         const firstItem = historyList.querySelector(".history-item:first-child");
         if (firstItem) gsap.from(firstItem, { opacity: 0, x: 20, duration: 0.35, ease: "power2.out" });
